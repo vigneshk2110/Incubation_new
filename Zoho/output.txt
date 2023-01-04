@@ -1,0 +1,7 @@
+This is written with BufferedWritter
+This is Line no 2
+1
+2
+3
+4
+5
