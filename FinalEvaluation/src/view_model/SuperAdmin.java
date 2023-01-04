@@ -1,6 +1,8 @@
-package userClass;
+package view_model;
 
 import java.util.Scanner;
+
+import controller.DAOHospitalOperations;
 
 public class SuperAdmin {
 
@@ -13,14 +15,14 @@ public class SuperAdmin {
 		Scanner scan = new Scanner(System.in);
 		String email = scan.next();
 		try {
-			while (!(Hospital.validateEmail(email, "SuperAdmin"))) {
+			while (!(DAOHospitalOperations.validateEmail(email, "SuperAdmin"))) {
 				System.out.println("Please Enter Right email");
 				email = scan.next();
 			}
 			System.out.println("Please enter your Password");
 			String passWord = scan.next();
 
-			while (!(Hospital.validateUser(email, passWord))) {
+			while (!(DAOHospitalOperations.validateUser(email, passWord))) {
 				System.out.println("Please Enter RIGHT Password");
 				passWord = scan.next();
 			}
@@ -78,7 +80,7 @@ public class SuperAdmin {
 			} else if (option == 4) {
 				manageUsers("OfficeStaff");
 			} else if (option == 5) {
-				Hospital.viewUserList();
+				DAOHospitalOperations.viewUserList();
 				;
 			} else {
 				flag = false;
@@ -98,11 +100,11 @@ public class SuperAdmin {
 			option = sc.nextInt();
 
 			if (option == 1) {
-				Hospital.addUser(userType);
+				DAOHospitalOperations.addUser(userType);
 			} else if (option == 2) {
-				Hospital.removeUser(userType);
+				DAOHospitalOperations.removeUser(userType);
 			} else if (option == 3) {
-				Hospital.viewUserList(userType);
+				DAOHospitalOperations.viewUserList(userType);
 			}
 
 			else {
@@ -119,7 +121,7 @@ public class SuperAdmin {
 		System.out.println("Please enter the Patient age");
 		int patientAge = sc.nextInt();
 
-		Hospital.bookAppointMent(patientName, patientAge);
+		DAOHospitalOperations.bookAppointMent(patientName, patientAge);
 
 	}
 
@@ -146,7 +148,7 @@ public class SuperAdmin {
 	}
 
 	private void viewTransaction() {
-		Hospital.viewTransaction();
+		DAOHospitalOperations.viewTransaction();
 	}
 
 	private void transferCash() {
@@ -157,7 +159,7 @@ public class SuperAdmin {
 			System.out.println("Transfering amount cannot be negative");
 			transferAmount = sc.nextDouble();
 		}
-		Hospital.transfer(transferAmount);
+		DAOHospitalOperations.transfer(transferAmount);
 
 	}
 
@@ -169,7 +171,7 @@ public class SuperAdmin {
 			System.out.println("Deposit amount cannot be negative");
 			depositAmount = sc.nextDouble();
 		}
-		Hospital.deposit(depositAmount);
+		DAOHospitalOperations.deposit(depositAmount);
 
 	}
 

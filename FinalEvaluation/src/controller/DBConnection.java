@@ -1,4 +1,4 @@
-package userClass;
+package controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DBConnect {
+public class DBConnection {
 
 	private static final String DBdriver = "com.mysql.cj.jdbc.Driver";
 	private static final String DBurl = "jdbc:mysql://localhost:3306/HospitalManagement";

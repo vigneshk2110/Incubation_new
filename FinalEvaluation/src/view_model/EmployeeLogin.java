@@ -1,4 +1,4 @@
-package userClass;
+package view_model;
 
 import java.util.Scanner;
 

@@ -1,24 +1,14 @@
-package userClass;
+package view_model;
 
-import java.sql.SQLException;
 import java.util.Scanner;
+import controller.DbStart;
 
 public class CallerMain {
-
-	static {
-
-		try {
-			DBConnect.connectDB();
-			DBConnect.query="{call hospitalmanagement.setupNewHospitalDatabase()}"; 
-			DBConnect.callStmt = DBConnect.con.prepareCall(DBConnect.query);
-			DBConnect.callStmt.execute();
-			DBConnect.closeDB();
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
+	
 	public static void main(String[] args){
+		
+		DbStart.dbSetUp();
+		
 
 		System.out.println("Welcome to the XYZ Hospital");
 		Scanner sc = new Scanner(System.in);

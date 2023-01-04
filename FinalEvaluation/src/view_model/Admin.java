@@ -1,6 +1,8 @@
-package userClass;
+package view_model;
 
 import java.util.Scanner;
+
+import controller.DAOHospitalOperations;
 
 public class Admin {
 
@@ -13,14 +15,14 @@ public class Admin {
 		Scanner scan = new Scanner(System.in);
 		String email = scan.next();
 		try {
-			while(!(Hospital.validateEmail(email, "Admin"))) {
+			while(!(DAOHospitalOperations.validateEmail(email, "Admin"))) {
 				System.out.println("Please Enter Right email");
 				email = scan.next();
 			}
 			System.out.println("Please enter your Password");
 			String passWord = scan.next();
 
-			while (!(Hospital.validateUser(email,passWord))) {
+			while (!(DAOHospitalOperations.validateUser(email,passWord))) {
 				System.out.println("Please Enter RIGHT Password");
 				passWord = scan.next();
 			}
@@ -98,7 +100,7 @@ public class Admin {
 			System.out.println("PayIn amount cannot be negative");
 			payInAmount = sc.nextDouble();
 		}
-		Hospital.payIn(payInAmount);
+		DAOHospitalOperations.payIn(payInAmount);
 	}
 
 	private void vendorsPayOut() {
@@ -109,7 +111,7 @@ public class Admin {
 			System.out.println("Payout amount cannot be negative");
 			payOutAmount = sc.nextDouble();
 		}
-		Hospital.payOut(payOutAmount);		
+		DAOHospitalOperations.payOut(payOutAmount);		
 	}
 
 	private void bookAppointment() {
@@ -119,7 +121,7 @@ public class Admin {
 		System.out.println("Please enter the Patient age");	
 		int patientAge= sc.nextInt(); 
 		
-		Hospital.bookAppointMent(patientName, patientAge);
+		DAOHospitalOperations.bookAppointMent(patientName, patientAge);
 
 	}
 
@@ -137,13 +139,13 @@ public class Admin {
 			option = sc.nextInt();
 
 			if (option == 1) {
-				Hospital.ambulenceAvailability();
+				DAOHospitalOperations.ambulenceAvailability();
 			}
 			else if (option == 2) {
-				Hospital.assignAmbulence();
+				DAOHospitalOperations.assignAmbulence();
 			}
 			else if (option == 3) {
-				Hospital.changeStatus();
+				DAOHospitalOperations.changeStatus();
 			}
 			else {
 				flag = false;

@@ -1,10 +1,12 @@
-package userClass;
+package view_model;
 
 import java.util.Scanner;
 
-public class OfficeStaff {
+import controller.DAOHospitalOperations;
 
-	public OfficeStaff() {
+public class Doctor {
+	
+	public Doctor() {
 		
 	}
 
@@ -14,19 +16,21 @@ public class OfficeStaff {
 		Scanner scan = new Scanner(System.in);
 		String email = scan.next();
 		try {
-			while(!(Hospital.validateEmail(email, "OfficeStaff"))) {
+			while(!(DAOHospitalOperations.validateEmail(email, "Doctor"))) {
 				System.out.println("Please Enter Right email");
 				email = scan.next();
 			}
 			System.out.println("Please enter your Password");
 			String passWord = scan.next();
 
-			while (!(Hospital.validateUser(email,passWord))) {
+			while (!(DAOHospitalOperations.validateUser(email,passWord))) {
 				System.out.println("Please Enter RIGHT Password");
 				passWord = scan.next();
 			}
+			
+			int docID  = findDocUserID(email);
 
-			officeStaffMenu();
+			doctorMenu(docID);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -35,28 +39,34 @@ public class OfficeStaff {
 
 	}
 
-	private void officeStaffMenu() {
+	private int findDocUserID(String email) {
+		return DAOHospitalOperations.findDocID(email);
+	}
+
+	private void doctorMenu(int docID) {
 		
 		Scanner sc = new Scanner(System.in);
 		int option = 0;
 		boolean flag = true;
 		while (flag) {
 
-			System.out.println("\nPlease select the desired option "
-					+ "\n1. View Doctors"
+			System.out.println("Please select the desired option "
+					+ "\n1. View Appointments"
 					+ "\n2. Book Appointment "
-					+ "\n3. View Appointments"
-					+ "");
+					+ "\n3. Consult Patient"
+					);
 			option = sc.nextInt();
 			
 			if (option == 1) {
-				Hospital.viewUserList("Doctor");
+				
+				DAOHospitalOperations.viewAppointments(docID);
 			}
 			else if (option == 2) {
+				System.out.println("Book Appointments");
 				bookAppointment();
 			}
 			else if (option == 3) {
-				viewAppointments();
+				DAOHospitalOperations.consultPatient(docID);
 			}
 			
 			else {
@@ -66,10 +76,6 @@ public class OfficeStaff {
 		
 	}
 
-	private void viewAppointments() {
-		Hospital.viewAppointments();		
-	}
-
 	private void bookAppointment() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Please enter the Patient Name");	
@@ -77,7 +83,7 @@ public class OfficeStaff {
 		System.out.println("Please enter the Patient age");	
 		int patientAge= sc.nextInt(); 
 		
-		Hospital.bookAppointMent(patientName, patientAge);		
+		DAOHospitalOperations.bookAppointMent(patientName, patientAge);
+		
 	}
-
 }

@@ -1,10 +1,10 @@
-package userClass;
+package controller;
 
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Scanner;
 
-public class Hospital extends DBConnect{
+public class DAOHospitalOperations extends DBConnection{
 
 	public static boolean validateEmail(String email, String loginType) {
 		try {

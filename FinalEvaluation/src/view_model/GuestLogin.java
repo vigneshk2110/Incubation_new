@@ -1,6 +1,8 @@
-package userClass;
+package view_model;
 
 import java.util.Scanner;
+
+import controller.DAOHospitalOperations;
 
 public class GuestLogin {
 
@@ -19,7 +21,7 @@ public class GuestLogin {
 			int option = scan.nextInt();
 
 			if (option == 1 ) {
-				Hospital.listSpeciality();
+				DAOHospitalOperations.listSpeciality();
 			}
 			else if (option == 2) {
 				bookAppointment();
@@ -39,6 +41,6 @@ public class GuestLogin {
 		System.out.println("Please enter the Patient age");	
 		int patientAge= sc.nextInt(); 
 		
-		Hospital.bookAppointMent(patientName, patientAge);
+		DAOHospitalOperations.bookAppointMent(patientName, patientAge);
 	}
 }

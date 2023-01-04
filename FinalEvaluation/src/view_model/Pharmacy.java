@@ -1,6 +1,8 @@
-package userClass;
+package view_model;
 
 import java.util.Scanner;
+
+import controller.DAOHospitalOperations;
 
 public class Pharmacy {
 
@@ -12,14 +14,14 @@ public class Pharmacy {
 		Scanner scan = new Scanner(System.in);
 		String email = scan.next();
 		try {
-			while(!(Hospital.validateEmail(email, "Pharmacist"))) {
+			while(!(DAOHospitalOperations.validateEmail(email, "Pharmacist"))) {
 				System.out.println("Please Enter Right email");
 				email = scan.next();
 			}
 			System.out.println("Please enter your Password");
 			String passWord = scan.next();
 
-			while (!(Hospital.validateUser(email,passWord))) {
+			while (!(DAOHospitalOperations.validateUser(email,passWord))) {
 				System.out.println("Please Enter RIGHT Password");
 				passWord = scan.next();
 			}
@@ -45,7 +47,7 @@ public class Pharmacy {
 			option = sc.nextInt();
 
 			if (option == 1) {
-				Hospital.disPatchMedicine();
+				DAOHospitalOperations.disPatchMedicine();
 			}
 
 			else {
