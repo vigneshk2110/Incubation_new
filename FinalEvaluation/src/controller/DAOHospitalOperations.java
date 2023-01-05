@@ -23,6 +23,8 @@ public class DAOHospitalOperations extends DBConnection{
 				System.out.println("User is Not "+ loginType +". Please Try with Different LoginType");
 				return false;
 			}
+			
+			closeDB();
 
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
