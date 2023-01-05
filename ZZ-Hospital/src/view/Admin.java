@@ -5,7 +5,7 @@ public class Admin implements Employees {
 	private String name;	
 	private int userID;
 	private String passWord;
-	private String userType = "Admin";
+	private String userType="Admin";
 
 
 	protected Admin(String name, int userID, String passWord) {
@@ -15,6 +15,7 @@ public class Admin implements Employees {
 	}
 
 	protected Admin() {
+		super();
 	}
 
 	public String getName() {
@@ -26,11 +27,15 @@ public class Admin implements Employees {
 	}
 
 	public String getuserType() {
-		return userType;
+		return this.userType;
 	}
 
-	private void setPassWord(String newPass) {
+	protected void setPassWord(String newPass) {
 		this.passWord = newPass;
+	}
+	
+	public String getPassword() {
+		return passWord;
 	}
 
 	@Override
@@ -52,9 +57,7 @@ public class Admin implements Employees {
 		return "Admin --> name= " + name + ", userID= " + userID + "";
 	}
 
-	public String getPassword() {
-		return passWord;
-	}
+	
 
 
 }

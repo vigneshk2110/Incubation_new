@@ -2,36 +2,19 @@ package view;
 
 public class SuperAdmin extends Admin {
 
-	private String name;	
-	private int userID;
-	private String passWord;
 	private String userType = "Super Admin";
 
 	protected SuperAdmin(String name, int userID, String passWord) {
-		this.name = name;
-		this.userID = userID;
-		this.passWord = passWord;		
+		super(name, userID, passWord);
 	}
 
 	protected SuperAdmin() {
-
+		super();
 	}
-
-	public String getName() {
-		return name;
-	}
-
-	public int getUserID() {
-		return userID;
-	}
-
+	
 	public String getuserType() {
-		return userType;
+		return this.userType;
 	}
-
-	private void setPassWord(String newPass) {
-		this.passWord = newPass;
-	}	
 
 	@Override
 	public boolean login() {
@@ -40,11 +23,6 @@ public class SuperAdmin extends Admin {
 
 	@Override
 	public void viewMenu() {	
-
-	}
-
-	public String getPassWord() {
-		return passWord;
 	}
 
 	@Override
@@ -54,7 +32,7 @@ public class SuperAdmin extends Admin {
 	
 	@Override
 	public String toString() {
-		return "SuperAdmin --> name= " + name + ", userID= " + userID + ", userType= " + userType+"";
+		return "SuperAdmin --> name= " + super.getName() + ", userID= " + super.getUserID() + ", userType= " + userType+"";
 	}
 
 }

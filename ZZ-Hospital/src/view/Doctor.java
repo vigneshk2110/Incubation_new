@@ -2,61 +2,37 @@ package view;
 
 public class Doctor extends Admin implements DoctorsInterface {
 
-	private String name;
-	private int userID;
-	private String passWord;
-	private String userType = "Doctor";
+	private String userType="Doctor";
 	private String degree;
 	private boolean doneMasters;
 	private boolean memberIMA;
 
-
-	protected Doctor(String name, int userID, String passWord, String degree, boolean masters, boolean memberIMA) {
-		this.name = name;
-		this.userID = userID;
-		this.passWord = passWord;
+	public Doctor(String name, int userID, String passWord, String degree, boolean masters, boolean memberIMA) {
+		super(name, userID, passWord);
+		
 		this.degree = degree;
 		this.doneMasters = masters;
 		this.memberIMA = memberIMA;
 	}
 	
 	protected Doctor(String name, int userID, String passWord, String degree) {
-		this.name = name;
-		this.userID = userID;
-		this.passWord = passWord;
+		super(name, userID, passWord);
 		this.degree = degree;
 	}
 
 	protected Doctor(String name, int userID, String passWord) {
-		this.name = name;
-		this.userID = userID;
-		this.passWord = passWord;
+		super(name, userID, passWord );
+		
 	}
 
-	protected Doctor() {		
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public int getUserID() {
-		return userID;
-	}
-	
-	public String getPassword() {
-		return passWord;
+	protected Doctor() {	
+		super();	
 	}
 
 	public String getuserType() {
-		return userType;
+		return this.userType;
 	}
 
-
-	private void setPassWord(String newPass) {
-		this.passWord = newPass;
-	}
-	
 	public boolean isDoneMasters() {
 		return this.doneMasters;
 	}
@@ -88,12 +64,12 @@ public class Doctor extends Admin implements DoctorsInterface {
 
 	@Override
 	public void changePassword(String newPass) {
-		setPassWord(newPass);
+		super.setPassWord(newPass);
 	}
 
 	@Override 
 	public String toString() {
-		return "Doctor --> name=" + name + ", userID=" + userID + ", userType=" + userType + "";
+		return "Doctor --> name=" + super.getName() + ", userID=" + super.getUserID() + ", userType=" + this.userType + "";
 	}
 
 	@Override // Doctor Interface
