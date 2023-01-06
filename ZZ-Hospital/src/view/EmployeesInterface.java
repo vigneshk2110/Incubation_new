@@ -1,8 +1,8 @@
 package view;
 
-public interface Employees {
+public interface EmployeesInterface {
 	
-	boolean login();
+	void login();
 	
 	void viewMenu();
 	

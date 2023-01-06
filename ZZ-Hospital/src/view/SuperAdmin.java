@@ -1,8 +1,9 @@
 package view;
 
-public class SuperAdmin extends Admin {
+import controller.DBEmployeeAssist;
 
-	private String userType = "Super Admin";
+public class SuperAdmin extends EmployeeClass {
+
 
 	protected SuperAdmin(String name, int userID, String passWord) {
 		super(name, userID, passWord);
@@ -10,15 +11,13 @@ public class SuperAdmin extends Admin {
 
 	protected SuperAdmin() {
 		super();
-	}
-	
-	public String getuserType() {
-		return this.userType;
-	}
+	}	
 
 	@Override
-	public boolean login() {
-		return false;
+	public void login() {
+		DBEmployeeAssist dbe = new DBEmployeeAssist();
+		dbe.login(this.getuserType());
+		
 	}
 
 	@Override
@@ -32,7 +31,7 @@ public class SuperAdmin extends Admin {
 	
 	@Override
 	public String toString() {
-		return "SuperAdmin --> name= " + super.getName() + ", userID= " + super.getUserID() + ", userType= " + userType+"";
+		return "SuperAdmin --> name= " + super.getName() + ", userID= " + super.getUserID() ;
 	}
 
 }

@@ -4,9 +4,7 @@ import java.util.Scanner;
 
 public class EmployeeLogin {
 
-	public static void main(String[] args) {
-
-	}
+	
 
 	void employeeLogin()  {
 		

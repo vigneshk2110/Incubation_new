@@ -27,7 +27,7 @@ public class DAOHospitalOperations extends DBConnection{
 			closeDB();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return true;
@@ -141,7 +141,7 @@ public class DAOHospitalOperations extends DBConnection{
 			closeDB();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -282,7 +282,7 @@ public class DAOHospitalOperations extends DBConnection{
 			System.out.println("User Deletion Successful");
 
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -305,7 +305,7 @@ public class DAOHospitalOperations extends DBConnection{
 			closeDB();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -328,7 +328,7 @@ public class DAOHospitalOperations extends DBConnection{
 			closeDB();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -420,7 +420,7 @@ public class DAOHospitalOperations extends DBConnection{
 			closeDB();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -819,7 +819,6 @@ public class DAOHospitalOperations extends DBConnection{
 			closeDB();
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

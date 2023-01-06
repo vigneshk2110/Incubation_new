@@ -45,5 +45,4 @@ public class Patient {
 		return "Patient --> name=" + name + ", age=" + age + ", gender=" + gender + "";
 	}
 
-
 }

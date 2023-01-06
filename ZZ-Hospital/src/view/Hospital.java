@@ -3,7 +3,7 @@ package view;
 import java.util.ArrayList;
 import java.util.Queue;
 
-public class Hospital {
+public class Hospital implements GovtPolicy {
 
 	private SuperAdmin supAdm1;
 	private Admin admin1;
@@ -41,6 +41,16 @@ public class Hospital {
 
 	public Queue<Patient> getPatientQueue() {
 		return patientQueue;
+	}
+
+	@Override
+	public boolean emergencyExit() {
+		return true;
+	}
+
+	@Override
+	public int DoctorsinDuty() {
+		return 2;
 	}
 
 }

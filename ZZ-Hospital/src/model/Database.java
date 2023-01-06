@@ -8,17 +8,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Database {
-	
+
 	private static final String DBdriver = "com.mysql.cj.jdbc.Driver";
 	private static final String DBurl = "jdbc:mysql://localhost:3306/hospital";
 	private static final String DBUname = "root";
 	private static final String DBPass = "root";	
-	
-	
+
+
 	public Connection getConnection() {
-		
+
 		Connection con = null;
-		
 		try {
 			Class.forName(DBdriver);
 			con = DriverManager.getConnection(DBurl, DBUname, DBPass);
@@ -27,10 +26,10 @@ public class Database {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}		
-		
+
 		return con;
 	}
-	
+
 	public void closeCon(Connection con) {
 		try {
 			con.close();
@@ -39,7 +38,7 @@ public class Database {
 		}
 		con = null;
 	}
-	
+
 	public void closeCon(Connection con, Statement st) {
 
 		try {
@@ -51,7 +50,7 @@ public class Database {
 		st =null;
 		con = null;		
 	}
-	
+
 	public void closeCon(Connection con, PreparedStatement preSt) {
 		try {
 			preSt.close();
@@ -62,7 +61,7 @@ public class Database {
 		preSt =null;
 		con = null;		
 	}
-	
+
 	public void closeCon(Connection con, CallableStatement callSt) {
 		try {
 			callSt.close();
@@ -73,6 +72,5 @@ public class Database {
 		callSt =null;
 		con = null;		
 	}
-	
-	
+
 }

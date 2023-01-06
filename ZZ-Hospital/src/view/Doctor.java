@@ -1,8 +1,7 @@
 package view;
 
-public class Doctor extends Admin implements DoctorsInterface {
+public class Doctor extends EmployeeClass implements DoctorsInterface {
 
-	private String userType="Doctor";
 	private String degree;
 	private boolean doneMasters;
 	private boolean memberIMA;
@@ -29,10 +28,6 @@ public class Doctor extends Admin implements DoctorsInterface {
 		super();	
 	}
 
-	public String getuserType() {
-		return this.userType;
-	}
-
 	public boolean isDoneMasters() {
 		return this.doneMasters;
 	}
@@ -54,8 +49,7 @@ public class Doctor extends Admin implements DoctorsInterface {
 	}
 
 	@Override
-	public boolean login() {
-		return false;
+	public void login() {
 	}
 
 	@Override
@@ -69,7 +63,7 @@ public class Doctor extends Admin implements DoctorsInterface {
 
 	@Override 
 	public String toString() {
-		return "Doctor --> name=" + super.getName() + ", userID=" + super.getUserID() + ", userType=" + this.userType + "";
+		return "Doctor --> name=" + super.getName() + ", userID=" + super.getUserID() ;
 	}
 
 	@Override // Doctor Interface

@@ -5,7 +5,9 @@ import java.util.*;
 import model.Database;
 import view.*;
 
-public class HospitalAssist {
+public class DBSetupAssist {
+	
+	
 
 	public void addHospital2DB(Hospital h1) {
 
@@ -17,11 +19,10 @@ public class HospitalAssist {
 		addDoctors2DB(docList);
 		Queue<Patient> patientQueue = h1.getPatientQueue();
 		addPatient2DB(patientQueue);
-
 	}
 
 	private void addPatient2DB(Queue<Patient> patientQueue) {
-		
+
 		Database db = new Database();
 		Connection con = db.getConnection();
 		PreparedStatement pst = null;		
@@ -35,16 +36,17 @@ public class HospitalAssist {
 				pst.setString(1,p1.getName());
 				pst.setInt(2, p1.getAge());
 				pst.setString(3, p1.getGender());
-				pst.setBoolean(0, false);
+				pst.setBoolean(4, false);
 				pst.execute();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
+			finally {
+
+			}
+
 		}
-
 		db.closeCon(con, pst);
-
-
 	}
 
 	private void addDoctors2DB(ArrayList<Doctor> docList) {
@@ -55,7 +57,7 @@ public class HospitalAssist {
 
 		for (Doctor doctor : docList) {
 
-			String query = "insert into hospital.DoctorList values(?,?,?,?,?,?);";
+			String query = "insert into hospital.DoctorList values(?,?,?,?,?,?,?);";
 
 			try {
 				pst = con.prepareStatement(query);
@@ -65,16 +67,19 @@ public class HospitalAssist {
 				pst.setString(4, doctor.getDegree());
 				pst.setBoolean(5, doctor.isDoneMasters());
 				pst.setBoolean(6, doctor.memberIMA());
+				pst.setString(7, doctor.getuserType());
 				pst.execute();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
 		}
+
 		db.closeCon(con, pst);
+
 	}
 
 	private void addAdmin2DB(Admin ad) {
-		
+
 		Database db = new Database();
 		Connection con = db.getConnection();
 		PreparedStatement pst = null;
@@ -95,11 +100,11 @@ public class HospitalAssist {
 	}
 
 	private void addSuperAdmin2DB(SuperAdmin sup) {
-		
+
 		Database db = new Database();
 		Connection con = db.getConnection();
 		PreparedStatement pst = null;
-		
+
 		String query = "insert into hospital.superadminlist values(?,?,?,?);";
 
 		try {
@@ -113,7 +118,5 @@ public class HospitalAssist {
 			e1.printStackTrace();
 		}
 		db.closeCon(con, pst);
-
 	}
-
 }
