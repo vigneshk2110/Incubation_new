@@ -23,11 +23,11 @@ public class DAOHospitalOperations extends DBConnection{
 				System.out.println("User is Not "+ loginType +". Please Try with Different LoginType");
 				return false;
 			}
-			
+
 			closeDB();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			
+
 			e.printStackTrace();
 		}
 		return true;
@@ -141,7 +141,7 @@ public class DAOHospitalOperations extends DBConnection{
 			closeDB();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			
+
 			e.printStackTrace();
 		}
 
@@ -282,7 +282,7 @@ public class DAOHospitalOperations extends DBConnection{
 			System.out.println("User Deletion Successful");
 
 		} catch (ClassNotFoundException | SQLException e) {
-			
+
 			e.printStackTrace();
 		}
 
@@ -305,7 +305,7 @@ public class DAOHospitalOperations extends DBConnection{
 			closeDB();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			
+
 			e.printStackTrace();
 		}
 
@@ -328,7 +328,7 @@ public class DAOHospitalOperations extends DBConnection{
 			closeDB();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			
+
 			e.printStackTrace();
 		}
 
@@ -420,7 +420,7 @@ public class DAOHospitalOperations extends DBConnection{
 			closeDB();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			
+
 			e.printStackTrace();
 		}
 
@@ -573,9 +573,9 @@ public class DAOHospitalOperations extends DBConnection{
 			preStmt.setInt(3, patientAge);
 			preStmt.setString(4, docName);
 			preStmt.execute();
-			
+
 			String status = "Waiting";
-			
+
 			query = "insert into hospitalmanagement.appointmentdetails values(?,?, ?, ?);";
 			preStmt = con.prepareStatement(query);
 			preStmt.setInt(1, appointmentID);
@@ -585,7 +585,7 @@ public class DAOHospitalOperations extends DBConnection{
 			preStmt.executeUpdate();
 
 			closeDB();
-			
+
 			System.out.println("Booked Appointment, Your Appointment ID is "+ appointmentID +" & you will be consulted by Dr."+ docName);
 
 
@@ -651,13 +651,13 @@ public class DAOHospitalOperations extends DBConnection{
 		int docID = 0;
 		try {
 			connectDB();
-			
-			
+
+
 			query = "SELECT hospitalmanagement.doctorsdetails.doctorID FROM hospitalmanagement.userdetails "
 					+ "inner join hospitalmanagement.doctorsdetails on "
 					+ "hospitalmanagement.doctorsdetails.userID = hospitalmanagement.userdetails.userID where"
 					+ " hospitalmanagement.userdetails.userEmail = ?;";
-			
+
 			preStmt = con.prepareStatement(query);
 			preStmt.setString(1, email);
 			reSet = preStmt.executeQuery();
@@ -670,7 +670,7 @@ public class DAOHospitalOperations extends DBConnection{
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return docID;
 	}
 
@@ -704,16 +704,16 @@ public class DAOHospitalOperations extends DBConnection{
 
 	public static void consultPatient(int docID) {
 		viewAppointments(docID);
-		
+
 		System.out.println("Please enter the patientID to Consult from the above List");		
 		Scanner scan = new Scanner(System.in);
 		int patientID = scan.nextInt();
-		
+
 		while (patientID<0) {
 			System.out.println("Patient ID cant be Negative");
 			patientID = scan.nextInt();
 		}
-		
+
 		try {
 			connectDB();
 			query = "update hospitalmanagement.appointmentdetails set consultStatus = 'Consulted' where patientID = ?;";
@@ -721,14 +721,14 @@ public class DAOHospitalOperations extends DBConnection{
 			preStmt.setInt(1, patientID);
 			preStmt.execute();
 			closeDB();
-			
+
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		System.out.println("Patient consulted & Tablet Prescribed");
 		prescribeMedicine(docID,patientID);		
-		
+
 	}
 
 	private static void prescribeMedicine(int docID, int patientID) {
@@ -737,71 +737,74 @@ public class DAOHospitalOperations extends DBConnection{
 			query = "SELECT * FROM hospitalmanagement.medicinestockdetails;";
 			stmt = con.createStatement();
 			reSet = stmt.executeQuery(query);
-			
+
 			System.out.println("******************************************************"
-						  + "\n*                 Medicine List                       *"
-						  + "\n*******************************************************"
-						  + "\nMedID \tMedName \tqtyAvailable");
-			
+					+ "\n*                 Medicine List                       *"
+					+ "\n*******************************************************"
+					+ "\nMedID \tMedName \tqtyAvailable");
+
 			while (reSet.next()) {
 				System.out.println(reSet.getInt(1)+ "\t" + reSet.getString(2) + "\t" + reSet.getInt(3));
 			}
-			
+
 			System.out.println("Please enter the MedID to select the Medicine or 0 to exit");
 			Scanner scan = new Scanner(System.in);
 			int medID = scan.nextInt();
-			
+
 			while (medID>0) {
-				
-				
+
+
 				query = "SELECT * FROM hospitalmanagement.medicinestockdetails where medicineID = ?;";
 				preStmt = con.prepareStatement(query);
 				preStmt.setInt(1, medID);
 				reSet = preStmt.executeQuery();
 				reSet.next();
 				System.out.println("******************************************************"
-						  + "\n*                 Medicine List                       *"
-						  + "\n*******************************************************"
-						  + "\nMedID \tMedName \tqtyAvailable");
-				
+						+ "\n*                 Medicine List                       *"
+						+ "\n*******************************************************"
+						+ "\nMedID \tMedName \tqtyAvailable");
+
 				System.out.println(reSet.getInt(1)+ "\t" + reSet.getString(2) + "\t" + reSet.getInt(3));
-				
+
 				System.out.println("Please enter the Quantity in numbers");
 				int quantity = scan.nextInt();
-				
+
 				while (quantity<0) {
 					System.out.println("PQuantity can't be Negative");
 					quantity = scan.nextInt();
 				}
-				
+
 				query = "insert into hospitalmanagement.prescribedmedicine values(?, ?, ?);;";
 				preStmt = con.prepareStatement(query);
 				preStmt.setInt(1, patientID);
 				preStmt.setInt(2, medID);
 				preStmt.setInt(3, quantity);
 				preStmt.execute();	
+
+//				throw new NullPointerException();
 				
-				 int quantityNew = reSet.getInt(3) - quantity;
-				 
-				 query = "update hospitalmanagement.medicinestockdetails set quantityAvailable = ? where medicineId = ?;";
-					preStmt = con.prepareStatement(query);
-					preStmt.setInt(1, quantityNew);
-					preStmt.setInt(2, medID);
-					preStmt.execute();		
-					
-					System.out.println("Please enter the MedID to select the Medicine or 0 to exit");
-					medID = scan.nextInt();
-					
+
+				int quantityNew = reSet.getInt(3) - quantity;
+
+				query = "update hospitalmanagement.medicinestockdetails set quantityAvailable = ? where medicineId = ?;";
+				preStmt = con.prepareStatement(query);
+				preStmt.setInt(1, quantityNew);
+				preStmt.setInt(2, medID);
+				preStmt.execute();		
+
+				System.out.println("Please enter the MedID to select the Medicine or 0 to exit");
+				medID = scan.nextInt();
+
 			}
-			
+
 			closeDB();
-			
-			
-			
+
+
+
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	public static void disPatchMedicine() {
@@ -810,14 +813,14 @@ public class DAOHospitalOperations extends DBConnection{
 			query = "select distinct patientID from hospitalmanagement.prescribedmedicine;";
 			preStmt = con.prepareStatement(query);
 			reSet = preStmt.executeQuery();
-			
+
 			System.out.println("The medicine has been dispatched to the below list of patients");
-			
+
 			while (reSet.next()) {
 				System.out.println(reSet.getInt(1));
 			}
 			closeDB();
-			
+
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}

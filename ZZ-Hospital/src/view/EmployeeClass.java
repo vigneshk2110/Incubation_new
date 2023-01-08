@@ -1,7 +1,7 @@
 package view;
 
 public abstract class EmployeeClass implements EmployeesInterface {
-	
+
 	private String name;	
 	private int userID;
 	private String passWord;
@@ -16,11 +16,15 @@ public abstract class EmployeeClass implements EmployeesInterface {
 	protected EmployeeClass() {
 		super();
 	}
-	
+
 	public abstract  String toString();
-	
+
 	public String getName() {
 		return name;
+	}
+	
+	public String getPassword() {
+		return passWord;
 	}
 
 	public int getUserID() {
@@ -34,14 +38,9 @@ public abstract class EmployeeClass implements EmployeesInterface {
 	protected void setPassWord(String newPass) {
 		this.passWord = newPass;
 	}
-	
-	public String getPassword() {
-		return passWord;
-	}
-	
+
 	@Override
 	public void login() {
-		
 	}
 
 	@Override

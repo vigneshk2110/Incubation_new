@@ -2,16 +2,17 @@ package view;
 
 public interface GovtPolicy {
 	
+		
+	static boolean adheringMinistryOfHealthRules() {
+		return true;
+	}
+	
+	static boolean adheringStateHealthRules() {
+		return true;
+	}
+	
 	default int minimumAmbulenceCount() {
 		return 2;
-	}
-	
-	default boolean adheringMinistryOfHealthRules() {
-		return true;
-	}
-	
-	default boolean adheringStateHealthRules() {
-		return true;
 	}
 	
 	boolean emergencyExit();
